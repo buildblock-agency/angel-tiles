@@ -57,34 +57,6 @@ export default function Home() {
       }
     });
 
-    // Product cards reveal
-    gsap.from(".product-card-reveal", {
-      opacity: 0,
-      y: 40,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".product-cards-section",
-        start: "top bottom-=50",
-        once: true,
-      }
-    });
-
-    // USP items reveal
-    gsap.from(".usp-card-reveal", {
-      opacity: 0,
-      y: 30,
-      stagger: 0.1,
-      duration: 0.7,
-      ease: "power1.out",
-      scrollTrigger: {
-        trigger: ".usp-cards-section",
-        start: "top bottom-=50",
-        once: true,
-      }
-    });
-
     // Force ScrollTrigger to refresh after a brief delay for safety
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
