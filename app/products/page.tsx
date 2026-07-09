@@ -114,7 +114,7 @@ export default function ProductsHub() {
       {/* Advisory block */}
       <section className="py-16 bg-charcoal-900 border-t border-charcoal-800">
         <div className="max-w-4xl mx-auto px-4 text-center space-y-6">
-          <div className="inline-flex p-3 rounded-full bg-gold-400/10 border border-gold-400/20 text-gold-400 mx-auto">
+          <div className="inline-flex p-3 rounded-full bg-primary/10 border border-primary/20 text-primary mx-auto">
             <Info className="w-6 h-6" />
           </div>
           <h3 className="font-serif text-xl sm:text-2xl font-bold text-white tracking-wide">
@@ -125,7 +125,7 @@ export default function ProductsHub() {
           </p>
           <Link
             href="/contact-us"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gold-400 hover:bg-gold-500 text-black font-bold text-xs tracking-widest transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary hover:bg-primary-hover text-white font-bold text-xs tracking-widest transition-colors"
           >
             REQUEST LIVE STOCK PHOTOS
           </Link>

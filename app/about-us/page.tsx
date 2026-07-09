@@ -161,7 +161,7 @@ export default function AboutUs() {
             {milestones.map((item, idx) => (
               <div key={idx} className="relative group">
                 {/* Timeline Dot */}
-                <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-charcoal-950 border-2 border-gold-400 group-hover:bg-gold-400 transition-colors duration-300" />
+                <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-charcoal-950 border-2 border-primary group-hover:bg-primary transition-colors duration-300" />
                 <div className="space-y-2">
                   <span className="font-serif text-xl font-bold text-gold-400">{item.year}</span>
                   <h4 className="font-serif text-lg font-semibold text-white">{item.title}</h4>
@@ -184,7 +184,7 @@ export default function AboutUs() {
         <div className="flex justify-center gap-4">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold-400 text-black font-bold text-xs tracking-widest hover:bg-gold-500 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-bold text-xs tracking-widest hover:bg-primary-hover transition-colors"
           >
             VIEW PRODUCTS <ChevronRight className="w-4 h-4" />
           </Link>

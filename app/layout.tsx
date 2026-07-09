@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Cinzel, Poppins } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "Angel Tiles & Stone Studio | Luxury Marble, Granite & Tiles in Jodhpur",
-  description: "Explore Jodhpur's premium collection of Italian imported marble, natural granites, designer tiles, customized stone cladding, and luxury sanitaryware.",
+  title: "Angel Tiles & Stone Studio | Luxury Designer Tiles, Marble & Granite in Jodhpur",
+  description: "Explore Jodhpur's premium collection of luxury designer tiles, vitrified slabs, custom tiles, Italian imported marble, natural granites, and sanitaryware.",
   metadataBase: new URL("https://angeltilesandstone.com"),
   alternates: {
     canonical: "/",
@@ -32,10 +32,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} h-full antialiased`}
+      className={`${cinzel.variable} ${poppins.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-gold-400 selection:text-black">
+      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-primary selection:text-white">
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

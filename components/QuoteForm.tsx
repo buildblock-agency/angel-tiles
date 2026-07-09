@@ -81,7 +81,7 @@ export default function QuoteForm({ defaultCategory = "", embedded = false }: Qu
     >
       {isSuccess ? (
         <div className="flex flex-col items-center justify-center text-center py-10 space-y-4">
-          <div className="w-16 h-16 bg-gold-400/10 border border-gold-400 rounded-full flex items-center justify-center text-gold-400 animate-pulse">
+          <div className="w-16 h-16 bg-primary/10 border border-primary rounded-full flex items-center justify-center text-primary animate-pulse">
             <CheckCircle className="w-8 h-8" />
           </div>
           <h3 className="font-serif text-2xl font-bold text-white tracking-wide">
@@ -92,7 +92,7 @@ export default function QuoteForm({ defaultCategory = "", embedded = false }: Qu
           </p>
           <button
             onClick={() => setIsSuccess(false)}
-            className="mt-4 px-6 py-2 rounded-full bg-gold-400 text-black font-semibold text-xs tracking-widest hover:bg-gold-500 transition-colors"
+            className="mt-4 px-6 py-2 rounded-full bg-primary text-white font-semibold text-xs tracking-widest hover:bg-primary-hover transition-colors"
           >
             SEND ANOTHER ENQUIRY
           </button>
@@ -217,7 +217,7 @@ export default function QuoteForm({ defaultCategory = "", embedded = false }: Qu
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-gold-400 hover:bg-gold-500 text-black font-bold text-sm tracking-widest transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-sm tracking-widest transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
               <>

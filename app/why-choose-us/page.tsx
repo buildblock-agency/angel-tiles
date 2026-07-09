@@ -108,7 +108,7 @@ export default function WhyChooseUsPage() {
         </p>
         <Link
           href="/contact-us"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold-400 text-black font-bold text-xs tracking-widest hover:bg-gold-500 transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-bold text-xs tracking-widest hover:bg-primary-hover transition-colors"
         >
           CONNECT WITH A CONSULTANT <ChevronRight className="w-4 h-4" />
         </Link>

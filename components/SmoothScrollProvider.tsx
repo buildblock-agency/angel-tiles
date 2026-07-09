@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,13 +11,16 @@ interface SmoothScrollProviderProps {
 }
 
 export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
+  const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
+
   useEffect(() => {
     // Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger);
 
     // Initialize Lenis smooth scroll
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // smooth acceleration
       orientation: "vertical",
       gestureOrientation: "vertical",
@@ -25,27 +29,64 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
       touchMultiplier: 1.5,
     });
 
-    // Update ScrollTrigger on Lenis scroll
-    lenis.on("scroll", ScrollTrigger.update);
+    lenisRef.current = lenis;
 
-    // Synchronize Lenis scroll animation loop with GSAP's ticker
-    const updatePhysics = (time: number) => {
-      lenis.raf(time * 1000); // gsap.ticker passes time in seconds, Lenis expects ms
+    // Update ScrollTrigger on scroll
+    lenis.on("scroll", () => {
+      ScrollTrigger.update();
+    });
+
+    // Listen to custom scroll lock events from mobile header
+    const handleLockScroll = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const shouldLock = customEvent.detail?.lock;
+      if (lenisRef.current) {
+        if (shouldLock) {
+          lenisRef.current.stop();
+        } else {
+          lenisRef.current.start();
+        }
+      }
     };
-    gsap.ticker.add(updatePhysics);
-    gsap.ticker.lagSmoothing(0);
+    window.addEventListener("lock-scroll", handleLockScroll);
 
-    // Refresh ScrollTrigger after a brief delay for image loading layout recalculation
-    const refreshTimeout = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 1200);
+    // Dedicated requestAnimationFrame rendering loop for Lenis
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
 
     return () => {
-      gsap.ticker.remove(updatePhysics);
-      clearTimeout(refreshTimeout);
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("lock-scroll", handleLockScroll);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  // Resize and recalculate page heights on page transitions to prevent scroll locking
+  useEffect(() => {
+    const handleResize = () => {
+      if (lenisRef.current) {
+        lenisRef.current.resize();
+        ScrollTrigger.refresh();
+      }
+    };
+
+    // Run immediately on page transition
+    handleResize();
+
+    // Trigger double checks as DOM settles and images load
+    const timeout1 = setTimeout(handleResize, 150);
+    const timeout2 = setTimeout(handleResize, 600);
+
+    return () => {
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+    };
+  }, [pathname]);
 
   return <>{children}</>;
 }

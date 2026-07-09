@@ -187,7 +187,7 @@ export default async function ProductCategoryPage({ params }: Props) {
                 className="group p-6 rounded-2xl bg-charcoal-950 border border-charcoal-850 hover:border-gold-400/20 transition-all duration-300 flex items-center justify-between gap-4"
               >
                 <div className="space-y-2">
-                  <h4 className="font-serif text-lg font-bold text-white group-hover:text-gold-400 transition-colors">
+                  <h4 className="font-serif text-lg font-bold text-white group-hover:text-primary transition-colors">
                     {p.name}
                   </h4>
                   <p className="text-xs text-charcoal-400 line-clamp-2 leading-relaxed max-w-sm">
@@ -196,7 +196,7 @@ export default async function ProductCategoryPage({ params }: Props) {
                 </div>
                 <Link
                   href={`/products/${p.slug}`}
-                  className="w-10 h-10 rounded-full bg-charcoal-900 border border-charcoal-800 flex items-center justify-center text-charcoal-400 group-hover:bg-gold-400 group-hover:text-black group-hover:border-transparent transition-all duration-300 shrink-0"
+                  className="w-10 h-10 rounded-full bg-charcoal-900 border border-charcoal-800 flex items-center justify-center text-charcoal-400 group-hover:bg-primary group-hover:text-white group-hover:border-transparent transition-all duration-300 shrink-0"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </Link>

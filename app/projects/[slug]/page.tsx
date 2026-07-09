@@ -194,7 +194,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 </div>
                 <Link
                   href={`/projects/${p.slug}`}
-                  className="w-10 h-10 rounded-full bg-charcoal-900 border border-charcoal-800 flex items-center justify-center text-charcoal-400 group-hover:bg-gold-400 group-hover:text-black group-hover:border-transparent transition-all duration-300 shrink-0"
+                  className="w-10 h-10 rounded-full bg-charcoal-900 border border-charcoal-800 flex items-center justify-center text-charcoal-400 group-hover:bg-primary group-hover:text-white group-hover:border-transparent transition-all duration-300 shrink-0"
                 >
                   <ArrowLeft className="w-5 h-5 rotate-180" />
                 </Link>

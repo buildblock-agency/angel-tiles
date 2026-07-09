@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail, Clock, ShieldCheck } from "lucide-react";
 import { siteSettings, brandsList } from "@/content/site-settings";
 import { products } from "@/content/products";
@@ -58,13 +59,23 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
           {/* Column 1: Brand & NAP */}
           <div className="space-y-6">
-            <Link href="/" className="flex flex-col">
-              <span className="font-serif text-xl font-bold tracking-wider text-white">
-                ANGEL TILES
-              </span>
-              <span className="text-[10px] font-sans tracking-[0.25em] text-gold-400">
-                & STONE STUDIO
-              </span>
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative w-10 h-10 overflow-hidden rounded-md border border-charcoal-850 group-hover:border-primary transition-colors">
+                <Image
+                  src="/logo.png"
+                  alt="Angel Tiles & Stone Studio Logo"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-serif text-lg font-bold tracking-wider text-primary group-hover:text-primary-hover transition-colors leading-none">
+                  ANGEL TILES
+                </span>
+                <span className="text-[9px] font-sans tracking-[0.25em] text-gold-400 group-hover:text-gold-300 transition-colors mt-0.5 leading-none">
+                  & STONE STUDIO
+                </span>
+              </div>
             </Link>
             <p className="text-sm text-charcoal-400 font-sans leading-relaxed">
               Jodhpur&apos;s premier showroom for luxury imported marbles, exotic granites, designer wall and floor tiles, customized CNC carvings, and elegant bath collections.
@@ -209,7 +220,17 @@ export default function Footer() {
         <div className="border-t border-charcoal-900 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2 text-xs text-charcoal-500">
             <ShieldCheck className="w-4 h-4 text-gold-500" />
-            <span>SEO Engineered by BuildBlock & Antigravity</span>
+            <span>
+              Developed by{" "}
+              <a
+                href="https://buildblock.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors underline font-medium"
+              >
+                buildblock
+              </a>
+            </span>
           </div>
 
           <p className="text-xs text-charcoal-500 text-center md:text-right">

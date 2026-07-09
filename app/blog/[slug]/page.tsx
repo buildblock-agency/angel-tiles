@@ -179,7 +179,7 @@ export default async function BlogDetailPage({ params }: Props) {
                 className="group p-6 rounded-2xl bg-charcoal-950 border border-charcoal-850 hover:border-gold-400/20 transition-all duration-300 flex items-center justify-between gap-4"
               >
                 <div className="space-y-2">
-                  <h4 className="font-serif text-lg font-bold text-white group-hover:text-gold-400 transition-colors line-clamp-1 leading-relaxed">
+                  <h4 className="font-serif text-lg font-bold text-white group-hover:text-primary transition-colors line-clamp-1 leading-relaxed">
                     {p.title}
                   </h4>
                   <div className="flex items-center gap-1.5 text-xs text-charcoal-500 font-semibold">
@@ -189,7 +189,7 @@ export default async function BlogDetailPage({ params }: Props) {
                 </div>
                 <Link
                   href={`/blog/${p.slug}`}
-                  className="w-10 h-10 rounded-full bg-charcoal-900 border border-charcoal-800 flex items-center justify-center text-charcoal-400 group-hover:bg-gold-400 group-hover:text-black group-hover:border-transparent transition-all duration-300 shrink-0"
+                  className="w-10 h-10 rounded-full bg-charcoal-900 border border-charcoal-800 flex items-center justify-center text-charcoal-400 group-hover:bg-primary group-hover:text-white group-hover:border-transparent transition-all duration-300 shrink-0"
                 >
                   <ArrowLeft className="w-5 h-5 rotate-180" />
                 </Link>

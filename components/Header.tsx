@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Phone, MessageSquare } from "lucide-react";
 import { products } from "@/content/products";
@@ -32,7 +33,20 @@ export default function Header() {
     setIsOpen(false);
     setProductsDropdown(false);
   }
-
+  // Lock body scroll and stop Lenis when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      window.dispatchEvent(new CustomEvent("lock-scroll", { detail: { lock: true } }));
+    } else {
+      document.body.style.overflow = "";
+      window.dispatchEvent(new CustomEvent("lock-scroll", { detail: { lock: false } }));
+    }
+    return () => {
+      document.body.style.overflow = "";
+      window.dispatchEvent(new CustomEvent("lock-scroll", { detail: { lock: false } }));
+    };
+  }, [isOpen]);
   const navLinks = [
     { name: "About", href: "/about-us" },
     { name: "Gallery", href: "/gallery" },
@@ -43,9 +57,10 @@ export default function Header() {
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
+    <>
+      <header
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          isScrolled || isOpen
           ? "bg-charcoal-950/90 backdrop-blur-md border-b border-charcoal-800/80 py-3 shadow-lg shadow-black/20"
           : "bg-transparent py-5"
       }`}
@@ -53,13 +68,23 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex flex-col group">
-            <span className="font-serif text-lg sm:text-xl font-bold tracking-wider text-white group-hover:text-gold-400 transition-colors">
-              ANGEL TILES
-            </span>
-            <span className="text-[9px] sm:text-[10px] font-sans tracking-[0.25em] text-gold-400 group-hover:text-white transition-colors">
-              & STONE STUDIO
-            </span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative w-9 h-9 overflow-hidden rounded-md border border-charcoal-850 group-hover:border-primary transition-colors">
+              <Image
+                src="/logo.png"
+                alt="Angel Tiles & Stone Studio Logo"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-serif text-base sm:text-lg font-bold tracking-wider text-primary group-hover:text-primary-hover transition-colors leading-none">
+                ANGEL TILES
+              </span>
+              <span className="text-[8px] sm:text-[9px] font-sans tracking-[0.25em] text-gold-400 group-hover:text-gold-300 transition-colors mt-0.5 leading-none">
+                & STONE STUDIO
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -84,13 +109,14 @@ export default function Header() {
 
               {/* Products Dropdown content */}
               <div
-                className={`absolute left-0 mt-2 w-64 rounded-xl bg-charcoal-900 border border-charcoal-800 shadow-xl py-3 transform transition-all duration-200 origin-top-left ${
+                style={{ backgroundColor: "#161617", border: "1px solid #242426" }}
+                className={`absolute left-0 mt-2 w-64 rounded-xl shadow-xl py-3 transform transition-all duration-200 origin-top-left ${
                   productsDropdown
                     ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
                 }`}
               >
-                <div className="px-4 py-2 border-b border-charcoal-800 mb-2">
+                <div style={{ borderBottom: "1px solid #242426" }} className="px-4 py-2 mb-2">
                   <Link
                     href="/products"
                     className="text-xs uppercase tracking-widest font-bold text-gold-400 hover:text-white transition-colors"
@@ -102,7 +128,7 @@ export default function Header() {
                   <Link
                     key={product.slug}
                     href={`/products/${product.slug}`}
-                    className="block px-4 py-2 text-sm text-charcoal-200 hover:bg-charcoal-800 hover:text-gold-400 transition-colors"
+                    className="block px-4 py-2 text-sm text-charcoal-200 hover:bg-[#242426] hover:text-gold-400 transition-colors"
                   >
                     <div className="font-semibold">{product.name}</div>
                     <div className="text-[10px] text-charcoal-400 truncate">
@@ -141,7 +167,7 @@ export default function Header() {
             </a>
             <Link
               href="/contact-us"
-              className="inline-flex items-center justify-center px-4 py-2 rounded-full border border-gold-400 text-xs font-semibold text-gold-400 tracking-wider hover:bg-gold-400 hover:text-black transition-all duration-300"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-full border border-primary text-xs font-semibold text-primary tracking-wider hover:bg-primary hover:text-white transition-all duration-300"
             >
               GET A QUOTE
             </Link>
@@ -159,8 +185,9 @@ export default function Header() {
           </div>
         </div>
       </div>
+    </header>
 
-      {/* Mobile Drawer Overlay */}
+    {/* Mobile Drawer Overlay */}
       <div
         className={`fixed inset-0 bg-black/80 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -170,19 +197,30 @@ export default function Header() {
 
       {/* Mobile Drawer Menu */}
       <div
-        className={`fixed top-0 right-0 w-80 h-full bg-charcoal-950 border-l border-charcoal-800 z-50 p-6 flex flex-col justify-between transform transition-transform duration-300 ease-out lg:hidden ${
+        style={{ backgroundColor: "#0f0f10", borderLeft: "1px solid #242426" }}
+        className={`fixed top-0 right-0 w-80 h-full z-50 p-6 flex flex-col justify-between transform transition-transform duration-300 ease-out lg:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div>
-          <div className="flex items-center justify-between pb-6 border-b border-charcoal-800">
-            <Link href="/" className="flex flex-col" onClick={() => setIsOpen(false)}>
-              <span className="font-serif text-lg font-bold tracking-wider text-white">
-                ANGEL TILES
-              </span>
-              <span className="text-[9px] font-sans tracking-[0.25em] text-gold-400">
-                & STONE STUDIO
-              </span>
+          <div style={{ borderBottom: "1px solid #242426" }} className="flex items-center justify-between pb-6">
+            <Link href="/" className="flex items-center gap-3">
+              <div style={{ border: "1px solid #242426" }} className="relative w-8 h-8 overflow-hidden rounded-md">
+                <Image
+                  src="/logo.png"
+                  alt="Angel Tiles & Stone Studio Logo"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-serif text-base font-bold tracking-wider text-primary leading-none">
+                  ANGEL TILES
+                </span>
+                <span className="text-[8px] font-sans tracking-[0.25em] text-gold-400 mt-0.5 leading-none">
+                  & STONE STUDIO
+                </span>
+              </div>
             </Link>
             <button
               onClick={() => setIsOpen(false)}
@@ -202,7 +240,6 @@ export default function Header() {
                 <Link
                   href="/products"
                   className="block text-sm font-semibold text-charcoal-200 hover:text-white"
-                  onClick={() => setIsOpen(false)}
                 >
                   All Products Hub
                 </Link>
@@ -211,7 +248,6 @@ export default function Header() {
                     key={product.slug}
                     href={`/products/${product.slug}`}
                     className="block text-sm text-charcoal-300 hover:text-gold-400"
-                    onClick={() => setIsOpen(false)}
                   >
                     {product.name}
                   </Link>
@@ -226,7 +262,6 @@ export default function Header() {
                   key={link.name}
                   href={link.href}
                   className="block text-base font-medium text-charcoal-200 hover:text-gold-400"
-                  onClick={() => setIsOpen(false)}
                 >
                   {link.name}
                 </Link>
@@ -257,13 +292,12 @@ export default function Header() {
           </a>
           <Link
             href="/contact-us"
-            className="flex items-center justify-center w-full py-3 rounded-full bg-gold-400 text-black font-semibold text-xs tracking-widest hover:bg-gold-500 transition-colors"
-            onClick={() => setIsOpen(false)}
+            className="flex items-center justify-center w-full py-3 rounded-full bg-primary text-white font-semibold text-xs tracking-widest hover:bg-primary-hover transition-colors"
           >
             GET A CUSTOM QUOTE
           </Link>
         </div>
       </div>
-    </header>
+    </>
   );
 }

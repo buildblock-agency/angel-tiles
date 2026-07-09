@@ -161,7 +161,7 @@ export default function ContactUsPage() {
 
             {/* Right Column: Quote form */}
             <div className="lg:col-span-6 lg:sticky lg:top-28">
-              <QuoteForm defaultCategory="marble" />
+              <QuoteForm defaultCategory="designer-tiles" />
             </div>
 
           </div>

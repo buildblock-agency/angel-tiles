@@ -17,6 +17,7 @@ import {
   ArrowUpRight,
   Sparkles
 } from "lucide-react";
+import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QuoteForm from "@/components/QuoteForm";
@@ -37,25 +38,14 @@ export default function Home() {
     // Hero content entrance
     gsap.from(".hero-animate", {
       opacity: 0,
-      y: 30,
-      stagger: 0.15,
-      duration: 1.0,
-      ease: "power3.out",
+      y: 40,
+      stagger: 0.12,
+      duration: 1.2,
+      ease: "power4.out",
     });
 
-    // Stats roll reveal
-    gsap.from(".stat-item", {
-      opacity: 0,
-      y: 20,
-      stagger: 0.1,
-      duration: 0.6,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".stats-section",
-        start: "top bottom-=50",
-        once: true,
-      }
-    });
+    // Stats animation is now handled by Framer Motion.
+    // Product cards and USP cards animations are also handled by Framer Motion.
 
     // Force ScrollTrigger to refresh after a brief delay for safety
     const timer = setTimeout(() => {
@@ -121,7 +111,7 @@ export default function Home() {
         </div>
 
         {/* Subtle background glow */}
-        <div className="absolute top-20 right-[15%] w-96 h-96 rounded-full bg-gold-500/5 blur-[120px] pointer-events-none" />
+        <div className="absolute top-20 right-[15%] w-96 h-96 rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
         <div className="absolute bottom-20 left-[15%] w-96 h-96 rounded-full bg-charcoal-700/10 blur-[120px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col lg:flex-row items-center justify-between gap-12 py-10">
@@ -130,35 +120,35 @@ export default function Home() {
           <div className="lg:w-[55%] space-y-8 text-left">
             <div className="hero-animate inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-charcoal-900 border border-charcoal-800 text-[10px] tracking-[0.2em] font-bold text-gold-400 uppercase shadow-lg">
               <Sparkles className="w-3 h-3 text-gold-400" /> 
-              ESTD. 2011 • THE ART OF LUXURY STONE
+              ESTD. 2011 • THE ART OF LUXURY TILES & STONE
             </div>
 
             <div className="hero-animate space-y-4">
               <span className="text-xs uppercase tracking-[0.3em] text-gold-500 font-bold block">
-                Direct Quarry Sourcing
+                Exclusive Designer Collections
               </span>
               <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05] uppercase">
-                Crafting <br />
-                <span className="text-gold-400">Timeless</span> <br />
-                Majesty
+                Luxury <br />
+                <span className="text-primary">Tiles</span> & <br />
+                <span className="text-gold-400">Bespoke</span> Stone
               </h1>
             </div>
 
             <p className="hero-animate text-sm sm:text-base text-charcoal-350 leading-relaxed max-w-lg font-light">
-              We bypass broker networks to select premium Italian Calacatta, Statuario, and quartzite blocks directly at the quarries. Engineered to match the strict aesthetic benchmarks of leading design agencies.
+              Discover Jodhpur's premier showcase of high-end vitrified tiles, designer porcelain slabs, and custom laser-engraved tiles. Carefully curated alongside hand-selected imported marble to transform premium residential and commercial spaces.
             </p>
 
             <div className="hero-animate flex flex-wrap items-center gap-4 pt-2">
               <Link
                 href="/products"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gold-400 hover:bg-gold-500 text-black font-bold text-xs tracking-widest shadow-xl shadow-gold-400/10 hover:shadow-gold-500/20 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary hover:bg-primary-hover text-white font-bold text-xs tracking-widest shadow-xl shadow-primary/10 hover:shadow-primary-hover/20 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
               >
                 EXPLORE COLLECTIONS
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/contact-us"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-charcoal-800 hover:border-gold-400 text-charcoal-300 hover:text-gold-400 font-bold text-xs tracking-widest bg-charcoal-900/40 hover:bg-charcoal-900 transition-all duration-300"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-charcoal-800 hover:border-primary text-charcoal-300 hover:text-primary bg-charcoal-900/40 hover:bg-charcoal-900 transition-all duration-300"
               >
                 VISIT JODHPUR SHOWROOM
               </Link>
@@ -170,13 +160,13 @@ export default function Home() {
             <div className="relative w-full max-w-sm sm:max-w-md group">
               
               {/* Outer decorative line corners */}
-              <div className="absolute -inset-4 border border-charcoal-900 rounded-[36px] pointer-events-none group-hover:border-gold-400/10 transition-colors duration-500" />
+              <div className="absolute -inset-4 border border-charcoal-900 rounded-[36px] pointer-events-none group-hover:border-primary/10 transition-colors duration-500" />
               
               {/* Main Image Frame */}
               <div className="relative aspect-[3/4] w-full rounded-3xl overflow-hidden border-[6px] border-charcoal-900 bg-charcoal-900 shadow-2xl shadow-black/85 transition-transform duration-500 group-hover:scale-[1.02]">
                 <Image
-                  src="/images/italian-marble.png"
-                  alt="Statuario Marble Slab Spec"
+                  src="/images/designer-tiles.png"
+                  alt="Royal Onyx Designer GVT Tile"
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 35vw"
@@ -188,21 +178,21 @@ export default function Home() {
               </div>
 
               {/* Museum Spec Plate Overlay */}
-              <div className="absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-charcoal-950/90 border border-charcoal-800/80 backdrop-blur-md shadow-2xl flex flex-col justify-between space-y-4 transition-all duration-300 group-hover:border-gold-400/20">
+              <div className="absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-charcoal-950/90 border border-charcoal-800/80 backdrop-blur-md shadow-2xl flex flex-col justify-between space-y-4 transition-all duration-300 group-hover:border-primary/20">
                 <div className="flex items-center justify-between border-b border-charcoal-900 pb-3">
                   <div>
                     <span className="text-[9px] uppercase tracking-widest text-gold-400 font-bold">Showroom Spec</span>
-                    <h3 className="font-serif text-base font-bold text-white tracking-wide">Statuario Italian White</h3>
+                    <h3 className="font-serif text-base font-bold text-white tracking-wide">Royal Onyx Designer GVT</h3>
                   </div>
-                  <span className="text-[9px] font-mono bg-gold-400/10 border border-gold-400/30 text-gold-400 px-2 py-0.5 rounded">
-                    BLOCK #A-108
+                  <span className="text-[9px] font-mono bg-primary/10 border border-primary/30 text-primary px-2 py-0.5 rounded">
+                    SLAB #T-802
                   </span>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4 text-[10px] font-sans">
                   <div>
                     <span className="text-charcoal-500 font-bold block uppercase tracking-wider">Origin</span>
-                    <span className="text-charcoal-250 font-semibold mt-0.5 block">Carrara, Italy</span>
+                    <span className="text-charcoal-250 font-semibold mt-0.5 block">Premium GVT Base</span>
                   </div>
                   <div>
                     <span className="text-charcoal-500 font-bold block uppercase tracking-wider">Finish</span>
@@ -210,7 +200,7 @@ export default function Home() {
                   </div>
                   <div>
                     <span className="text-charcoal-500 font-bold block uppercase tracking-wider">Avg Size</span>
-                    <span className="text-charcoal-250 font-semibold mt-0.5 block">10.5&apos; x 6.2&apos;</span>
+                    <span className="text-charcoal-250 font-semibold mt-0.5 block">1200 x 2400 mm</span>
                   </div>
                   <div>
                     <span className="text-charcoal-500 font-bold block uppercase tracking-wider">Availability</span>
@@ -255,14 +245,21 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat, i) => (
-              <div key={i} className="stat-item space-y-1">
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-20px" }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
+                className="space-y-1"
+              >
                 <div className="font-serif text-3xl sm:text-4xl font-bold text-gold-400">
                   {stat.value}
                 </div>
                 <div className="text-xs tracking-wider text-charcoal-400 uppercase font-semibold">
                   {stat.label}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -284,10 +281,14 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <div
+            {products.map((product, idx) => (
+              <motion.div
                 key={product.slug}
-                className="product-card-reveal group relative rounded-2xl bg-charcoal-900 border border-charcoal-800 overflow-hidden hover:border-gold-400/40 hover:shadow-xl hover:shadow-black/40 transition-all duration-300 flex flex-col justify-between"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: idx * 0.06 }}
+                className="group relative rounded-2xl bg-charcoal-900 border border-charcoal-800 overflow-hidden hover:border-gold-400/40 hover:shadow-xl hover:shadow-black/40 transition-all duration-300 flex flex-col justify-between"
               >
                 <div className="relative h-64 overflow-hidden">
                   <Image
@@ -301,7 +302,7 @@ export default function Home() {
                 </div>
                 <div className="p-6 flex flex-col flex-1 justify-between">
                   <div className="space-y-3">
-                    <h4 className="font-serif text-xl font-bold text-white group-hover:text-gold-400 transition-colors">
+                    <h4 className="font-serif text-xl font-bold text-white group-hover:text-primary transition-colors">
                       {product.name}
                     </h4>
                     <p className="text-xs text-charcoal-400 line-clamp-3 leading-relaxed">
@@ -314,13 +315,13 @@ export default function Home() {
                     </span>
                     <Link
                       href={`/products/${product.slug}`}
-                      className="w-8 h-8 rounded-full bg-charcoal-950 border border-charcoal-800 flex items-center justify-center text-charcoal-400 group-hover:bg-gold-400 group-hover:text-black group-hover:border-transparent transition-all duration-300"
+                      className="w-8 h-8 rounded-full bg-charcoal-950 border border-charcoal-800 flex items-center justify-center text-charcoal-400 group-hover:bg-primary group-hover:text-white group-hover:border-transparent transition-all duration-300"
                     >
                       <ChevronRight className="w-4 h-4" />
                     </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -425,16 +426,20 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {coreUSPs.map((usp, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="usp-card-reveal p-8 rounded-2xl bg-charcoal-900 border border-charcoal-800/80 hover:border-gold-400/20 transition-all duration-300 space-y-4"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 }}
+                className="p-8 rounded-2xl bg-charcoal-900 border border-charcoal-800/80 hover:border-gold-400/20 transition-all duration-300 space-y-4"
               >
                 <div className="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center">
                   {usp.icon}
                 </div>
                 <h4 className="font-serif text-lg font-bold text-white">{usp.title}</h4>
                 <p className="text-xs text-charcoal-400 leading-relaxed">{usp.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -513,7 +518,7 @@ export default function Home() {
 
             {/* Quote Form */}
             <div>
-              <QuoteForm defaultCategory="marble" />
+              <QuoteForm defaultCategory="designer-tiles" />
             </div>
           </div>
         </div>
